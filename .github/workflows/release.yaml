@@ -16,7 +16,7 @@ jobs:
         with:
           repository: mochimodev/mochimo
       - name: version
-        run: echo "::set-output name=version::$(git describe --always --tags --abrev=0)"
+        run: echo "version=$(git describe --always --tags --abrev=0)" >> $GITHUB_OUTPUT
         id: version
       - name: Create Release
         id: create_release
