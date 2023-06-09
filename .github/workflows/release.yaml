@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
@@ -46,7 +46,7 @@ jobs:
             nvidia: 525.85.12
           - cuda: 12.1.1
             nvidia: 530.30.02
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     needs: release
     steps:
       - name: Set up build
@@ -69,10 +69,10 @@ jobs:
           cd bin
           cp /usr/local/cuda/lib64/libcudart.so.11.0 .
           cp /usr/local/cuda/lib64/stubs/libnvidia-ml.so .
-          tar zcvf mcmminer-${{ needs.release.outputs.version }}.ubuntu-18.04.cuda-${{ matrix.cuda }}-${{ matrix.nvidia }}.tar.gz *
+          tar zcvf mcmminer-${{ needs.release.outputs.version }}.ubuntu-20.04.cuda-${{ matrix.cuda }}-${{ matrix.nvidia }}.tar.gz *
       - name: Upload release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ github.token }}
-          file: bin/mcmminer-${{ needs.release.outputs.version }}.ubuntu-18.04.cuda-${{ matrix.cuda }}-${{ matrix.nvidia }}.tar.gz
+          file: bin/mcmminer-${{ needs.release.outputs.version }}.ubuntu-20.04.cuda-${{ matrix.cuda }}-${{ matrix.nvidia }}.tar.gz
           tag: ${{ github.ref }}
